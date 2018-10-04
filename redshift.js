@@ -11,6 +11,6 @@ var client = {
 };
  
 // The values passed in to the options object will be the difference between a connection pool and raw connection
-var redshiftClient = new Redshift(client, [options]);
+var redshiftClient = new Redshift(client, {rawConnection: false});
  
 module.exports = redshiftClient;
