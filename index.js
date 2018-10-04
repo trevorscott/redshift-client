@@ -47,8 +47,7 @@ if (cluster.isMaster) {
     })
     .catch(e =>{
       console.error(e.stack)           
-    }) 
-  });
+    }); 
 
   app.listen(PORT, function () {
     console.error(`Node cluster worker ${process.pid}: listening on port ${PORT}`);
