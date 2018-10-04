@@ -4,17 +4,19 @@ const express = require('express');
 const path    = require('path');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
-const Redshift = require('node-redshift');
+
+const { Pool } = require('pg')
 
 const PORT = process.env.PORT || 5000;
 
-var client = {
+
+const pool = new Pool({
   user: process.env.REDSHIFT_USERNAME,
+  host: process.env.REDSHIFT_HOST,
   database: process.env.REDSHIFT_DATABASE,
   password: process.env.REDSHIFT_PASSWORD,
-  port: 5439,
-  host:  process.env.REDSHIFT_HOST
-};
+  port: 5439
+});
  
 // The values passed in to the options object will be the difference between a connection pool and raw connection
 var redshiftClient = new Redshift(client, {rawConnection: false});
@@ -37,16 +39,15 @@ if (cluster.isMaster) {
 
   // options is an optional object with one property so far {raw: true} returns 
   // just the data from redshift. {raw: false} returns the data with the pg object
-  const queryString = "select count(*) from systables";
+  const text = "SELECT COUNT(*) FROM systables";
 
-  redshiftClient.query(queryString, {raw: false}, (err, data) => {
-    if (err) {
-      console.log("error");
-      console.error(err);
-    } else {
-      console.log("success");
-      console.log(data);
-    }
+  pool.query(text)
+    .then(r => {
+      console.log(r)
+    })
+    .catch(e =>{
+      console.error(e.stack)           
+    }) 
   });
 
   app.listen(PORT, function () {
