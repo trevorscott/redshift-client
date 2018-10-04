@@ -9,7 +9,6 @@ const { Pool } = require('pg')
 
 const PORT = process.env.PORT || 5000;
 
-
 const pool = new Pool({
   user: process.env.REDSHIFT_USERNAME,
   host: process.env.REDSHIFT_HOST,
@@ -18,8 +17,6 @@ const pool = new Pool({
   port: 5439
 });
  
-// The values passed in to the options object will be the difference between a connection pool and raw connection
-var redshiftClient = new Redshift(client, {rawConnection: false});
 
 // Multi-process to utilize all CPU cores.
 if (cluster.isMaster) {
