@@ -39,15 +39,15 @@ if (cluster.isMaster) {
   // just the data from redshift. {raw: false} returns the data with the pg object
   const queryString = "select count(*) from systables";
 
-  redshiftClient.query(queryString, {raw: false})
-    .then(function(data){
-        console.log("success");
-        console.log(data);
-    })
-    .catch(function(err){
-        console.log("error");
-        console.error(err);
-    });
+  redshiftClient.query(queryString, {raw: false}, (err, data) => {
+    if (err) {
+      console.log("error");
+      console.error(err);
+    } else {
+      console.log("success");
+      console.log(data);
+    }
+  });
 
   app.listen(PORT, function () {
     console.error(`Node cluster worker ${process.pid}: listening on port ${PORT}`);
