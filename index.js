@@ -43,7 +43,8 @@ if (cluster.isMaster) {
       console.log(r)
     })
     .catch(e =>{
-      console.error(e.stack)           
+      console.error(e)           
+      throw e;
     }); 
 
   app.listen(PORT, function () {
