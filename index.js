@@ -14,8 +14,7 @@ const pool = new Pool({
   host: process.env.REDSHIFT_HOST,
   database: process.env.REDSHIFT_DATABASE,
   password: process.env.REDSHIFT_PASSWORD,
-  port: 5439,
-  ssl: true
+  port: 5439
 });
  
 
