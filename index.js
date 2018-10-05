@@ -36,7 +36,7 @@ if (cluster.isMaster) {
 
   // options is an optional object with one property so far {raw: true} returns 
   // just the data from redshift. {raw: false} returns the data with the pg object
-  const text = "SELECT COUNT(*) FROM systables";
+  const text = "SELECT * FROM pg_catalog.pg_tables;";
 
   pool.query(text)
     .then(r => {
