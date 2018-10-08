@@ -34,16 +34,13 @@ if (cluster.isMaster) {
 } else {
   const app = express();
 
-  // options is an optional object with one property so far {raw: true} returns 
-  // just the data from redshift. {raw: false} returns the data with the pg object
   const text = "SELECT * FROM pg_catalog.pg_tables;";
 
   pool.query(text)
     .then(r => {
-      console.log(r)
+      console.log(`Successfully connected to AWS Redshift Cluster: ${process.env.REDSHIFT_HOST}:${process.env.REDSHIFT_DATABASE}.`)
     })
-    .catch(e =>{
-      console.error(e)           
+    .catch(e =>{         
       throw e;
     }); 
 
