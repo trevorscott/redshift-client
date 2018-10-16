@@ -45,7 +45,6 @@ if (cluster.isMaster) {
   const redshiftTestQuery = "SELECT * FROM pg_catalog.pg_tables;";
   redshiftPool.query(redshiftTestQuery)
     .then(r => {
-      console.log(r);
       console.log(`Successfully connected to AWS Redshift Cluster: ${process.env.REDSHIFT_HOST}:${process.env.REDSHIFT_DATABASE}`)
     })
     .catch(e =>{         
