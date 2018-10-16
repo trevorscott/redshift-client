@@ -17,12 +17,12 @@ const redshiftPool = new Pool({
   port: 5439
 });
 
-  console.log("connecting to redshift...")
-  const redshiftTestQuery = "SELECT * FROM pg_catalog.pg_tables;";
-  redshiftPool.query(redshiftTestQuery)
-    .then(r => {
-      console.log(`Successfully connected to AWS Redshift Cluster: ${process.env.REDSHIFT_HOST}:${process.env.REDSHIFT_DATABASE}`)
-    })
-    .catch(e =>{         
-      throw e;
-    }); 
+console.log("connecting to redshift...")
+const redshiftTestQuery = "SELECT * FROM pg_catalog.pg_tables;";
+redshiftPool.query(redshiftTestQuery)
+  .then(r => {
+    console.log(`Successfully connected to AWS Redshift Cluster: ${process.env.REDSHIFT_HOST}:${process.env.REDSHIFT_DATABASE}`)
+  })
+  .catch(e =>{         
+    throw e;
+  }); 

@@ -18,3 +18,10 @@ heroku config:set REDSHIFT_DATABASE='mydb' \
   REDSHIFT_USERNAME='your-rs-username'
 git push heroku master
 ```
+
+
+# Test Redshift Connection
+
+```
+heroku run node redshift-client.js
+```
