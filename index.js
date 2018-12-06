@@ -30,5 +30,5 @@ redshiftPool.query(redshiftTestQuery)
   }); 
 
 app.listen(PORT, function () {
-  console.error(`Node cluster worker ${process.pid}: listening on port ${PORT}`);
+  console.log(`listening on port ${PORT}`);
 });
